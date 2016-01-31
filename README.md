@@ -6,6 +6,6 @@ Requires/works with:
 -RabbitMQ (running as service)
 -Erlang language/framework (RabbitMQ req)
 
-Developed with pyDev (Eclipse Python Plugin Extension).
+Developed with PyDev (Eclipse Python Plugin Extension).
 
 Author: Pablo Cruz Navea
