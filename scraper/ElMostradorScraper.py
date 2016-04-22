@@ -19,5 +19,6 @@ class ElMostradorScraper(object):
         
         for high_impact_article in soup.find_all("img"):
             if len(high_impact_article.get('alt')) > 50 :
-                SQLDBService.insertTemporaryEncounter(high_impact_article.get('alt').replace(u'\u201c', '"').replace(u'\u201d', '"'), 
+                print high_impact_article.get('alt')
+                SQLDBService.insertTemporaryEncounter(high_impact_article.get('alt').replace(u'\u201c', '"').replace(u'\u201d', '"'),
                                                       "ElMostrador")
