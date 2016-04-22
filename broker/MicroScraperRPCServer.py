@@ -5,6 +5,7 @@ Created on 13-03-2016
 '''
 #!/usr/bin/env python
 import pika
+import sys
 from scraper.ElMostradorScraper import ElMostradorScraper
 from scraper.EmolScraper import EmolScraper
 
@@ -21,12 +22,14 @@ def scrape(source):
         try:
             ElMostradorScraper.scrapeElMostrador()
         except:
+            print "Unexpected error: ", sys.exc_info()[0]
             status = 2
     
     if source == "Emol":
         try:
             EmolScraper.scrapeEmol()
         except:
+            print "Unexpected error: ", sys.exc_info()[0]
             status = 2
 
     # on success, return 1!, on any error, return 2
