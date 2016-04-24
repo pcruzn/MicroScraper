@@ -8,6 +8,7 @@ import pika
 import sys
 from scraper.ElMostradorScraper import ElMostradorScraper
 from scraper.EmolScraper import EmolScraper
+from scraper.EmolScrapingStrategy import EmolScrapingStrategy
 from scraper.Scraper import Scraper
 from scraper.ElMostradorScrapingStrategy import ElMostradorScrapingStrategy
 
@@ -21,6 +22,7 @@ channel.queue_declare(queue='rpc_scraping_queue')
 def scrape(source):
     status = 1
 
+    #scrape ElMostrador
     if source == "ElMostrador":
         scraper = Scraper()
         scraper.setScrapingStrategy(ElMostradorScrapingStrategy())
@@ -30,19 +32,17 @@ def scrape(source):
             print "Unexpected error: ", sys.exc_info()[0]
             status = 2
 
-    '''if source == "ElMostrador":
-        try:
-            ElMostradorScraper.scrapeElMostrador()
-        except:
-            print "Unexpected error: ", sys.exc_info()[0]
-            status = 2
-    '''
+    # scrape Emol
     if source == "Emol":
+        scraper = Scraper()
+        scraper.setScrapingStrategy(EmolScrapingStrategy())
         try:
-            EmolScraper.scrapeEmol()
+            scraper.doScrape(source)
         except:
             print "Unexpected error: ", sys.exc_info()[0]
             status = 2
+
+    # soon... scrape generic
 
     # on success, return 1!, on any error, return 2
     return status
