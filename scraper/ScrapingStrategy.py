@@ -3,21 +3,12 @@ Created on 14-04-2016
 
 @author: Pablo Cruz Navea
 '''
-from scraper.ElMostradorScraper import ElMostradorScraper
-from scraper.EmolScraper import EmolScraper
+from abc import ABCMeta, abstractmethod
 
+# we use an abstract class instead of interface (as they do not really exist in python)
 class ScrapingStrategy(object):
-    @staticmethod
-    def scrape(source):
+    #__metaclass__ = ABCMeta
+
+    @abstractmethod
+    def scrape(self, source):
         raise NotImplementedError()
-        
-        
-class EmolScrapingStrategy(ScrapingStrategy):
-    @staticmethod
-    def scrape(source):
-        return EmolScraper.scrapeEmol(source)
-    
-class ElMostradorScrapingStrategy(ScrapingStrategy):
-    @staticmethod
-    def scrape(source):
-        return ElMostradorScraper.scrapeElMostrador(source)

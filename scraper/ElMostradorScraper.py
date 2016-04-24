@@ -11,7 +11,7 @@ from sqldb.SQLDB import SQLDBService
 class ElMostradorScraper(object):
     @staticmethod
     def scrapeElMostrador():
-        r  = requests.get("http://www.elmostrador.cl")
+        r  = requests.get("http://www.elmostgdrador.cl")
         
         html_doc = r.text
         
