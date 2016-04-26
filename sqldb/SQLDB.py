@@ -7,27 +7,25 @@ import MySQLdb
 
 class SQLDBService (object):
     @staticmethod
-    def insertTemporaryEncounter(description, source):
-        db = MySQLdb.connect(host="localhost",    # your host, usually localhost
-                     user="moai",         # your username
-                     passwd="moai1234",  # your password
-                     db="moai_test")        # name of the data base
+    def storeTemporaryEncounter(description, source):
+        db = MySQLdb.connect(host="localhost",
+                     user="moai",
+                     passwd="moai1234",
+                     db="moai_test")
 
-        # you must create a Cursor object. It will let
-        #  you execute all the queries you need
+
         cur = db.cursor()
         
-        insertEncounterSQL = "INSERT INTO encuentro_temporal (descripcion, fuente, fecha_obtencion, hora_obtencion) VALUES ('%s', '%s', CURDATE(), CURTIME())" % (description, source)
+        storeEncounterSQL = "INSERT INTO encuentro_temporal (descripcion, fuente, fecha_obtencion, hora_obtencion) VALUES ('%s', '%s', CURDATE(), CURTIME())" % (description, source)
 
-        # Use all the SQL you like
         try:
-            cur.execute(insertEncounterSQL)
+            cur.execute(storeEncounterSQL)
             db.commit()
+            db.close()
+            status = 0
         except:
             db.rollback()
-        
-        # print all the first cell of all the rows
-#        for row in cur.fetchall():
-#        print row[2]
-    
-        db.close()
+            db.close()
+            status = 2
+
+        return status
